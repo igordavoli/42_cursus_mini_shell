@@ -6,7 +6,10 @@
 *.ko
 *.obj
 *.elf
-
+.vscode
+*.txt
+mini_shell
+objects*
 # Linker output
 *.ilk
 *.map
