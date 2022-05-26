@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 22:23:45 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/25 22:55:21 by idavoli-         ###   ########.fr       */
+/*   Created: 2022/05/25 22:51:26 by idavoli-          #+#    #+#             */
+/*   Updated: 2022/05/25 23:09:00 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "../mini_shell.h"
 
-int	is_builtin(char *cmd)
+int pwd(void)
 {
-	if (!ft_strncmp(cmd, "echo", 5) || !ft_strncmp(cmd, "pwd", 4))
-		return (1);
-	return (0);
+	char cwd[PATH_MAX];
+	if (getcwd(cwd, sizeof(cwd)) != NULL) {
+	{
+		ft_putstr_fd(cwd, STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	}
+	} else {
+		perror("error");
+		return 1;
+	}
+	return 0;
 }

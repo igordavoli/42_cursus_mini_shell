@@ -20,9 +20,11 @@ HEADER_BONUS = $(SRC_DIR_BONUS)/checker.h
 
 SRC_FILES	=	mini_shell.c \
 				is_builtin.c \
-				exec_builtin.c
+				exec_builtin.c \
+				execute.c
 
 SRC_FILES	+=	builtins/echo.c \
+				builtins/pwd.c \
 
 SRC_FILES_B	=	checker.c \
 

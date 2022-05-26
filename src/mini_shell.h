@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/21 23:58:43 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/25 23:05:46 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ typedef struct s_msh
 
 }	t_msh;
 
-int	is_builtin(char *cmd);
-int	exec_builtin(char **cmd);
-int	echo(char **cmd);
+int		is_builtin(char *cmd);
+void	execute(char **cmd);
+int		exec_builtin(char **cmd);
+int		echo(char **cmd);
+int		pwd(void);
 
 #endif

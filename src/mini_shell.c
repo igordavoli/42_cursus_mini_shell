@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/21 23:57:28 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/25 23:01:10 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	msh.env = envp;
 	while (1)
 	{
-		msh.line = readline("idavoli- in mypc> ");
+		msh.line = readline("idavoli- in 42> ");
 		if (*msh.line)
 		{
 			add_history(msh.line);
