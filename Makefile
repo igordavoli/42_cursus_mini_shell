@@ -4,8 +4,7 @@ CC = gcc
 CFLAGS = -g3 -Wall -Wextra -Werror
 RL_FLAG = -lreadline
 
-VALGRIND = valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all -s
-
+VALGRIND = valgrind --suppressions=./local.supp --leak-check=full
 LIBFT = libs/libft/libft.a
 
 NAME = mini_shell
@@ -25,6 +24,7 @@ SRC_FILES	=	mini_shell.c \
 
 SRC_FILES	+=	builtins/echo.c \
 				builtins/pwd.c \
+				builtins/cd.c \
 
 SRC_FILES_B	=	checker.c \
 

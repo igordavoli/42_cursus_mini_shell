@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 22:17:09 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/26 23:28:34 by idavoli-         ###   ########.fr       */
+/*   Created: 2022/05/25 22:51:26 by idavoli-          #+#    #+#             */
+/*   Updated: 2022/05/26 22:56:57 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "../mini_shell.h"
 
-int	exec_builtin(char **cmd)
+int cd(char *path)
 {
-	if (!ft_strncmp(*cmd, "echo", 5))
-		echo(cmd);
-	if (!ft_strncmp(*cmd, "pwd", 4))
-		pwd();
-	if (!ft_strncmp(*cmd, "cd", 3))
-		cd(cmd[1]);
+	if (chdir(path) == -1)
+	{
+		ft_putstr_fd("cd: ", STDERR_FILENO);
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putchar_fd('\n', STDERR_FILENO);
+		return (1);
+	}
 	return (0);
 }
