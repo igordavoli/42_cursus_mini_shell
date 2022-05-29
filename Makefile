@@ -27,7 +27,8 @@ SRC_FILES	=	mini_shell.c \
 				exec_builtin.c \
 				create_list.c \
 				execute.c\
-				refresh_prompt.c
+				refresh_prompt.c \
+				signal.c
 SRC_FILES	+=	builtins/echo.c \
 				builtins/cd.c \
 				builtins/pwd.c \
