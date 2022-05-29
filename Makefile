@@ -1,43 +1,49 @@
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re cleanb fcleanb reb
 
-CC = gcc
-CFLAGS = -g3 -Wall -Wextra -Werror
-RL_FLAG = -lreadline
+CC			=	gcc
+CFLAGS		=	-g3 -Wall -Wextra -Werror
+RL_FLAG		=	-lreadline
 
-VALGRIND = valgrind --suppressions=./local.supp --leak-check=full
-LIBFT = libs/libft/libft.a
+SUPP_FILES	=	readline.supp add_history.supp
+SUPP_PRFX	=	--suppressions=./supps
+SUPP_SRC	=	$(addprefix $(SUPP_PRFX)/, $(SUPP_FILES))
+VALGRIND	=	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all
+VALGRIND	+=	-s $(SUPP_SRC)
 
-NAME = mini_shell
-SRC_DIR = src
-OBJ_DIR = objects
-HEADER = $(SRC_DIR)/mini_shell.h
+LIBFT		=	libs/libft/libft.a
 
-NAME_BONUS = checker
-SRC_DIR_BONUS = src_bonus
-OBJ_DIR_BONUS = objects_bonus
-HEADER_BONUS = $(SRC_DIR_BONUS)/checker.h
+NAME		=	mini_shell
+SRC_DIR		=	src
+OBJ_DIR		=	objects
+HEADER		=	$(SRC_DIR)/mini_shell.h
+
+NAME_BONUS	=	checker
+SRC_DIR_B	=	src_bonus
+OBJ_DIR_B	=	objects_bonus
+HEADER_B	=	$(SRC_DIR_B)/checker.h
 
 SRC_FILES	=	mini_shell.c \
 				is_builtin.c \
 				exec_builtin.c \
+				create_list.c \
 				execute.c
-
 SRC_FILES	+=	builtins/echo.c \
 				builtins/pwd.c \
 				builtins/cd.c \
+				builtins/msh_exit.c \
 
-SRC_FILES_B	=	checker.c \
+# SRC_FILES_B	=
 
-SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRC			=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJ			=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-SRC_BONUS = $(addprefix $(SRC_DIR_BONUS)/, $(SRC_FILES_B))
-OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
+SRC_BONUS	=	$(addprefix $(SRC_DIR_B)/, $(SRC_FILES_B))
+OBJ_BONUS	=	$(SRC_BONUS:$(SRC_DIR_B)/%.c=$(OBJ_DIR_B)/%.o)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c
+$(OBJ_DIR_B)/%.o: $(SRC_DIR_B)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
@@ -65,21 +71,20 @@ test: all
 	./$(NAME) $(TEST_LIST)
 
 val: all
-	make re
 	$(VALGRIND) ./$(NAME)
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJ_DIR_BONUS) $(OBJ_BONUS) $(HEADER_BONUS)
+$(NAME_BONUS): $(OBJ_DIR_B) $(OBJ_BONUS) $(HEADER_B)
 	@make -C ./libs/libft
 	@$(CC) $(CFLAGS) $(OBJ_BONUS) -o $(NAME_BONUS) $(LIBFT)
 
-$(OBJ_DIR_BONUS):
-	mkdir -p $(OBJ_DIR_BONUS)/utils
-	mkdir -p $(OBJ_DIR_BONUS)/operations
+$(OBJ_DIR_B):
+	mkdir -p $(OBJ_DIR_B)/utils
+	mkdir -p $(OBJ_DIR_B)/operations
 
 cleanb:
-	@rm -rf $(OBJ_DIR_BONUS)
+	@rm -rf $(OBJ_DIR_B)
 
 fcleanb:
 	@make cleanb
