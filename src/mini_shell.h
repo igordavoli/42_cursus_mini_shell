@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 04:03:05 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 04:27:27 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int		unset(char *env);
 int		env(void);
 void	msh_exit(void);
 t_dlist	*create_list(char **strs);
+char	*refresh_prompt(void);
 
 #endif
