@@ -6,29 +6,30 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/25 23:01:10 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 00:55:32 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
+t_msh	g_msh;
+
 int	main(int argc, char **argv, char **envp)
 {
-	t_msh	msh;
-
-	msh.argc = argc;
-	msh.argv = argv;
-	msh.env = envp;
+	g_msh.argc = argc;
+	g_msh.argv = argv;
+	g_msh.envp = envp;
+	g_msh.envp_lst = create_list(envp);
 	while (1)
 	{
-		msh.line = readline("idavoli- in 42> ");
-		if (*msh.line)
+		g_msh.line = readline("idavoli- in 42> ");
+		if (*g_msh.line)
 		{
-			add_history(msh.line);
-			msh.splitted_line = ft_split2(msh.line, ' ');
-			execute(msh.splitted_line);
-			free(msh.line);
-			ft_free_ptrs((void **)msh.splitted_line);
+			add_history(g_msh.line);
+			g_msh.splitted_line = ft_split2(g_msh.line, ' ');
+			execute(g_msh.splitted_line);
+			free(g_msh.line);
+			ft_free_ptrs((void **)g_msh.splitted_line);
 		}
 	}
 	return (0);

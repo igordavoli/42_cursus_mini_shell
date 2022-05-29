@@ -6,13 +6,13 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 22:51:26 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/26 22:56:57 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 00:54:22 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_shell.h"
 
-int cd(char *path)
+int	cd(char *path)
 {
 	if (chdir(path) == -1)
 	{
