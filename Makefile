@@ -31,6 +31,7 @@ SRC_FILES	+=	builtins/echo.c \
 				builtins/pwd.c \
 				builtins/cd.c \
 				builtins/env.c \
+				builtins/export.c \
 				builtins/msh_exit.c
 
 # SRC_FILES_B	=
