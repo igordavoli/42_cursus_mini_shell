@@ -28,10 +28,11 @@ SRC_FILES	=	mini_shell.c \
 				create_list.c \
 				execute.c
 SRC_FILES	+=	builtins/echo.c \
-				builtins/pwd.c \
 				builtins/cd.c \
-				builtins/env.c \
+				builtins/pwd.c \
 				builtins/export.c \
+				builtins/unset.c \
+				builtins/env.c \
 				builtins/msh_exit.c
 
 # SRC_FILES_B	=

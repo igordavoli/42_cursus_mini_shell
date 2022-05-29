@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 02:36:30 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 04:03:05 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ typedef struct s_msh
 	int		argc;
 	char	**argv;
 	char	**envp;
-	t_list	*envp_lst;
+	t_dlist	*envp_lst;
 	char	*line;
 	char	**splitted_line;
+	char	*prompt;
 
 }	t_msh;
 
@@ -39,8 +40,9 @@ int		echo(char **cmd);
 int		cd(char *path);
 int		pwd(void);
 int		export(char *var);
+int		unset(char *env);
 int		env(void);
 void	msh_exit(void);
-t_list	*create_list(char **strs);
+t_dlist	*create_list(char **strs);
 
 #endif

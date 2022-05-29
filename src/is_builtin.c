@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:23:45 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 02:23:56 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 03:20:22 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	is_builtin(char *cmd)
 		|| !ft_strncmp(cmd, "cd", 3)
 		|| !ft_strncmp(cmd, "pwd", 4)
 		|| !ft_strncmp(cmd, "export", 7)
+		|| !ft_strncmp(cmd, "unset", 6)
 		|| !ft_strncmp(cmd, "env", 4)
 		|| !ft_strncmp(cmd, "exit", 5))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 02:10:00 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 02:40:01 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 03:02:31 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	export(char *var)
 {
-	t_list	*new_var;
+	t_dlist	*new_var;
 	char	*mall_var;
 
 	if (*var == '=')
@@ -22,9 +22,9 @@ int	export(char *var)
 	mall_var = ft_strdup(var);
 	if (mall_var == NULL)
 		return (1);
-	new_var = ft_lstnew((void *)mall_var);
+	new_var = ft_dlstnew((void *)mall_var);
 	if (new_var == NULL)
 		return (1);
-	ft_lstadd_back(&g_msh.envp_lst, new_var);
+	ft_dlstadd_back(&g_msh.envp_lst, new_var);
 	return (0);
 }
