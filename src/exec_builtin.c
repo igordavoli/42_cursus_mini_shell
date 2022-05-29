@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:17:09 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/28 21:14:10 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 02:04:15 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int	exec_builtin(char **cmd)
 		cd(cmd[1]);
 	if (!ft_strncmp(*cmd, "exit", 5))
 		msh_exit();
+	if (!ft_strncmp(*cmd, "env", 4))
+		env();
 	return (0);
 }

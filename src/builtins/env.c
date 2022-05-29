@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 22:23:45 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 02:05:10 by idavoli-         ###   ########.fr       */
+/*   Created: 2022/05/29 01:59:00 by idavoli-          #+#    #+#             */
+/*   Updated: 2022/05/29 02:06:22 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "../mini_shell.h"
 
-int	is_builtin(char *cmd)
+static void	print(void *varenv)
 {
-	if (!ft_strncmp(cmd, "echo", 5)
-		|| !ft_strncmp(cmd, "pwd", 4)
-		|| !ft_strncmp(cmd, "exit", 5)
-		|| !ft_strncmp(cmd, "env", 4)
-		|| !ft_strncmp(cmd, "cd", 3))
-		return (1);
+	printf("%s\n", (char *)varenv);
+}
+
+int	env(void)
+{
+	ft_lstiter(g_msh.envp_lst, &print);
 	return (0);
 }

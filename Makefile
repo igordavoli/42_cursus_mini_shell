@@ -30,7 +30,8 @@ SRC_FILES	=	mini_shell.c \
 SRC_FILES	+=	builtins/echo.c \
 				builtins/pwd.c \
 				builtins/cd.c \
-				builtins/msh_exit.c \
+				builtins/env.c \
+				builtins/msh_exit.c
 
 # SRC_FILES_B	=
 

@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 00:56:22 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 02:04:45 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		exec_builtin(char **cmd);
 int		echo(char **cmd);
 int		pwd(void);
 int		cd(char *path);
+int		env(void);
 void	msh_exit(void);
 t_list	*create_list(char **strs);
 
