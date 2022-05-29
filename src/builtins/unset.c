@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 02:41:18 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 03:45:42 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/29 04:40:17 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*get_node_value(t_dlist *node)
 
 static void	remove_node(t_dlist *node)
 {
-	if(node->next == NULL)
+	if (node->next == NULL)
 		node->prev->next = NULL;
 	else if (node->prev == NULL)
 		node->next->prev = NULL;
@@ -33,7 +33,7 @@ static void	remove_node(t_dlist *node)
 
 int	unset(char *env)
 {
-	t_dlist *tmp;
+	t_dlist	*tmp;
 	int		env_len;
 	char	*node_value;
 
