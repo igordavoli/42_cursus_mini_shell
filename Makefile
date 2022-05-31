@@ -28,7 +28,11 @@ SRC_FILES	=	mini_shell.c \
 				create_list.c \
 				execute.c\
 				refresh_prompt.c \
-				signal.c
+				signal.c \
+				find_cmd_path.c \
+				exec_external.c \
+				get_node_value.c
+
 SRC_FILES	+=	builtins/echo.c \
 				builtins/cd.c \
 				builtins/pwd.c \

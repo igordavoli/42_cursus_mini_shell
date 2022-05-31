@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:13:29 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 21:49:15 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/05/30 23:00:06 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	echo(char **cmd)
 				write(1, " ", 1);
 		}
 		if (!has_n)
-			ft_putchar_fd('\n', 1);		
+			ft_putchar_fd('\n', 1);
 	}
 	return (0);
 }

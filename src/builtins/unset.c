@@ -6,16 +6,11 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 02:41:18 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 04:40:17 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/30 22:03:16 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_shell.h"
-
-static char	*get_node_value(t_dlist *node)
-{
-	return ((char *)node->content);
-}
 
 static void	remove_node(t_dlist *node)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 21:15:51 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/05/30 22:52:57 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include <errno.h>
 # include <signal.h>
+# include <wait.h>
 
 typedef struct s_msh
 {
@@ -47,5 +48,8 @@ void	msh_exit(void);
 t_dlist	*create_list(char **strs);
 char	*refresh_prompt(void);
 void	signal_handler(int signum);
+char	*get_node_value(t_dlist *node);
+char	*find_cmd_path(char *cmd);
+int		exec_external(char **cmd);
 
 #endif
