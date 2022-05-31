@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 22:17:09 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 03:24:44 by idavoli-         ###   ########.fr       */
+/*   Created: 2022/05/29 00:55:51 by idavoli-          #+#    #+#             */
+/*   Updated: 2022/05/30 23:21:37 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "../mini_shell.h"
 
-int	exec_builtin(char **cmd)
+t_dlist	*create_list(char **strs)
 {
-	if (!ft_strncmp(*cmd, "echo", 5))
-		echo(cmd);
-	if (!ft_strncmp(*cmd, "cd", 3))
-		cd(cmd[1]);
-	if (!ft_strncmp(*cmd, "pwd", 4))
-		pwd();
-	if (!ft_strncmp(*cmd, "export", 7))
-		export(cmd[1]);
-	if (!ft_strncmp(*cmd, "unset", 6))
-		unset(cmd[1]);
-	if (!ft_strncmp(*cmd, "env", 4))
-		env();
-	if (!ft_strncmp(*cmd, "exit", 5))
-		msh_exit();
-	return (0);
+	t_dlist	*envp_lst;
+
+	envp_lst = NULL;
+	while (*strs)
+		ft_dlstadd_back(&envp_lst, ft_dlstnew((void *)ft_strdup(*strs++)));
+	return (envp_lst);
 }

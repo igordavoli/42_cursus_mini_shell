@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/29 21:07:40 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/05/30 22:58:54 by idavoli-         ###   ########.fr       */
+/*   Created: 2022/05/21 22:23:45 by idavoli-          #+#    #+#             */
+/*   Updated: 2022/05/30 23:21:37 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "../mini_shell.h"
 
-void	signal_handler(int signum)
+int	is_builtin(char *cmd)
 {
-	(void)signum;
-	write (1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (!ft_strncmp(cmd, "echo", 5)
+		|| !ft_strncmp(cmd, "cd", 3)
+		|| !ft_strncmp(cmd, "pwd", 4)
+		|| !ft_strncmp(cmd, "export", 7)
+		|| !ft_strncmp(cmd, "unset", 6)
+		|| !ft_strncmp(cmd, "env", 4)
+		|| !ft_strncmp(cmd, "exit", 5))
+		return (1);
+	return (0);
 }

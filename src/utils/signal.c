@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 23:20:18 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/30 22:54:11 by idavoli-         ###   ########.fr       */
+/*   Created: 2022/05/29 21:07:40 by ldatilio          #+#    #+#             */
+/*   Updated: 2022/05/30 23:21:37 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "../mini_shell.h"
 
-void	execute(char **cmd)
+void	signal_handler(int signum)
 {
-	if (is_builtin(*cmd))
-		exec_builtin(cmd);
-	else
-		exec_external(cmd);
+	(void)signum;
+	write (1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }

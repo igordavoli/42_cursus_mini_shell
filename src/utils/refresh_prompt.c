@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_list.c                                      :+:      :+:    :+:   */
+/*   refresh_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/29 00:55:51 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 02:54:46 by idavoli-         ###   ########.fr       */
+/*   Created: 2022/05/29 04:26:33 by idavoli-          #+#    #+#             */
+/*   Updated: 2022/05/30 23:21:37 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "../mini_shell.h"
 
-t_dlist	*create_list(char **strs)
+char	*refresh_prompt(void)
 {
-	t_dlist	*envp_lst;
+	char	*prompt;
+	char	cwd[PATH_MAX];
 
-	envp_lst = NULL;
-	while (*strs)
-		ft_dlstadd_back(&envp_lst, ft_dlstnew((void *)ft_strdup(*strs++)));
-	return (envp_lst);
+	if (g_msh.prompt)
+		free(g_msh.prompt);
+	prompt = "user on domain in ";
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		prompt = ft_strjoin2(prompt, cwd, 0, 0);
+	g_msh.prompt = ft_strjoin2(prompt, "> ", 1, 0);
+	return (g_msh.prompt);
 }

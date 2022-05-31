@@ -6,11 +6,11 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 02:18:04 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/30 22:59:35 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/05/30 23:21:37 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "../mini_shell.h"
 
 static char	**get_paths(void)
 {

@@ -23,15 +23,16 @@ OBJ_DIR_B	=	objects_bonus
 HEADER_B	=	$(SRC_DIR_B)/checker.h
 
 SRC_FILES	=	mini_shell.c \
-				is_builtin.c \
-				exec_builtin.c \
-				create_list.c \
-				execute.c\
-				refresh_prompt.c \
-				signal.c \
-				find_cmd_path.c \
-				exec_external.c \
-				get_node_value.c
+
+SRC_FILES	+=	utils/is_builtin.c \
+				utils/exec_builtin.c \
+				utils/create_list.c \
+				utils/execute.c\
+				utils/refresh_prompt.c \
+				utils/signal.c \
+				utils/find_cmd_path.c \
+				utils/exec_external.c \
+				utils/get_node_value.c
 
 SRC_FILES	+=	builtins/echo.c \
 				builtins/cd.c \
