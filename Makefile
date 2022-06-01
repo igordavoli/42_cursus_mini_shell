@@ -32,6 +32,8 @@ SRC_FILES	+=	utils/is_builtin.c \
 				utils/signal.c \
 				utils/find_cmd_path.c \
 				utils/exec_external.c \
+				utils/free_cmds.c \
+				utils/parse_cmds.c \
 				utils/get_node_value.c
 
 SRC_FILES	+=	builtins/echo.c \

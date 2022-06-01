@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_exit.c                                         :+:      :+:    :+:   */
+/*   free_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/28 21:09:36 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/31 23:53:55 by idavoli-         ###   ########.fr       */
+/*   Created: 2022/05/31 23:49:15 by idavoli-          #+#    #+#             */
+/*   Updated: 2022/05/31 23:50:45 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_shell.h"
 
-void	msh_exit(void)
+void	free_cmds(char ***cmds)
 {
-	ft_dlstclear(&g_msh.envp_lst, &free);
-	free_cmds(g_msh.splitted_cmds);
-	free(g_msh.prompt);
-	exit(0);
+	int	i;
+	int	j;
+
+	if (cmds)
+	{
+		i = 0;
+		while (cmds[i])
+		{
+			j = 0;
+			while (cmds[i][j])
+				free(cmds[i][j++]);
+			free(cmds[i]);
+			i++;
+		}
+		free(cmds);
+	}
 }

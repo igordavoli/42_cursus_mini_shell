@@ -6,7 +6,7 @@
 /*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/30 22:52:57 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/06/01 00:18:51 by idavoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_msh
 	char	**envp;
 	t_dlist	*envp_lst;
 	char	*line;
-	char	**splitted_line;
+	char	***splitted_cmds;
 	char	*prompt;
 
 }	t_msh;
@@ -51,5 +51,7 @@ void	signal_handler(int signum);
 char	*get_node_value(t_dlist *node);
 char	*find_cmd_path(char *cmd);
 int		exec_external(char **cmd);
+void	free_cmds(char ***cmds);
+char	***parse_cmds(char *cmds);
 
 #endif
