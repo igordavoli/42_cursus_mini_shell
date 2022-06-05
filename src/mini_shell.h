@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/06/01 00:18:51 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/06/05 23:44:55 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ char	*find_cmd_path(char *cmd);
 int		exec_external(char **cmd);
 void	free_cmds(char ***cmds);
 char	***parse_cmds(char *cmds);
+char	**expand_values(char **value);
 
 #endif

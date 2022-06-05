@@ -1,22 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   expand_values.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 23:20:18 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/06/05 23:53:44 by ldatilio         ###   ########.fr       */
+/*   Created: 2022/06/05 23:18:51 by ldatilio          #+#    #+#             */
+/*   Updated: 2022/06/06 00:36:12 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_shell.h"
 
-void	execute(char **cmd)
+char	**expand_values(char **value)
 {
-	cmd = expand_values(cmd);
-	if (is_builtin(*cmd))
-		exec_builtin(cmd);
-	else
-		exec_external(cmd);
+	int		i;
+	int		j;
+	char	*temp;
+	
+	j = 0;
+	while (value[j])
+	{
+		i = 0;
+		while (value[j][i])
+		{
+			if (value[j][i] == '$')
+			{
+				if (value[j][i + 1] == '?')
+				{
+					temp = value[j];
+					value[j] = ft_strdup("130");
+					free(temp);
+					break ;
+				}
+			}
+			i++;
+		}
+		j++;
+	}
+	return (value);
 }
