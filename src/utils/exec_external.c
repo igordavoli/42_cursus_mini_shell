@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_external.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:48:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/30 23:21:37 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/06/05 22:35:31 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int	exec_external(char **cmd)
 	if (!pid)
 	{
 		if (execve(find_cmd_path(*cmd), cmd, g_msh.envp) == -1)
-			printf("Error: can not exec: %s", *cmd);
-		ft_putchar_fd('\n', 1);
+			printf("Error: can not exec: %s\n", *cmd);
 	}
 	wait(NULL);
+	if (pid == 0)
+		exit(0);
 	return (0);
 }
