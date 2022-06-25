@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/06/05 23:44:55 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/06/25 23:49:30 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,39 @@ typedef struct s_msh
 	char	*line;
 	char	***splitted_cmds;
 	char	*prompt;
+	int		exit_code;
 
 }	t_msh;
 
 extern t_msh	g_msh;
 
-int		is_builtin(char *cmd);
-void	execute(char **cmd);
-int		exec_builtin(char **cmd);
-int		echo(char **cmd);
+/* ************************************************************************** */
+/* ******************************** BUILTINS ******************************** */
+/* ************************************************************************** */
 int		cd(char *path);
-int		pwd(void);
-int		export(char *var);
-int		unset(char *env);
+int		echo(char **cmd);
 int		env(void);
-void	msh_exit(void);
+int		export(char *var);
+void	msh_exit(char **cmd);
+int		pwd(void);
+int		unset(char *env);
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/* ********************************* UTILS ********************************** */
+/* ************************************************************************** */
 t_dlist	*create_list(char **strs);
+int		exec_builtin(char **cmd);
+int		exec_external(char **cmd);
+void	execute(char **cmd);
+char	**expand_values(char **value);
+char	*find_cmd_path(char *cmd);
+void	free_cmds(char ***cmds);
+char	*get_node_value(t_dlist *node);
+int		is_builtin(char *cmd);
+char	***parse_cmds(char *cmds);
 char	*refresh_prompt(void);
 void	signal_handler(int signum);
-char	*get_node_value(t_dlist *node);
-char	*find_cmd_path(char *cmd);
-int		exec_external(char **cmd);
-void	free_cmds(char ***cmds);
-char	***parse_cmds(char *cmds);
-char	**expand_values(char **value);
+/* ************************************************************************** */
 
 #endif

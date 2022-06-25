@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:17:09 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/30 23:21:37 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/06/26 00:39:41 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int	exec_builtin(char **cmd)
 	if (!ft_strncmp(*cmd, "env", 4))
 		env();
 	if (!ft_strncmp(*cmd, "exit", 5))
-		msh_exit();
+		msh_exit(cmd);
 	return (0);
 }
