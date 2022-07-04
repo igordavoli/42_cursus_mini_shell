@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/06/26 22:50:34 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/03 22:01:47 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ extern t_msh	g_msh;
 void	cd(char **cmd);
 int		echo(char **cmd);
 int		env(void);
-int		export(char *var);
+char	*ft_getenv(char *var);
+void	export(char **cmd);
+void	export_var(char *cmd);
 void	msh_exit(char **cmd);
 int		pwd(void);
 int		unset(char *env);

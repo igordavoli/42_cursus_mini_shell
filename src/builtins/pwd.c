@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 22:51:26 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/29 00:54:36 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/06/24 01:56:21 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int	pwd(void)
 		perror("error");
 		return (1);
 	}
+	g_msh.exit_code = 0;
 	return (0);
 }
