@@ -6,13 +6,13 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 22:51:26 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/03 22:00:37 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/06 02:50:43 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_shell.h"
 
-static	void show_dir_error(char *cmd)
+static	void	show_dir_error(char *cmd)
 {
 	ft_putstr_fd("cd: ", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
@@ -22,7 +22,7 @@ static	void show_dir_error(char *cmd)
 	g_msh.exit_code = 1;
 }
 
-static	int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ static	int	ft_strcmp(char *s1, char *s2)
 	return (1);
 }
 
-static	void	cd_oldpwd()
+static	void	cd_oldpwd(void)
 {
 	if (ft_getenv("OLDPWD") == NULL)
 	{
@@ -47,15 +47,21 @@ static	void	cd_oldpwd()
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
-static	void	chpwd()
+static	void	chpwd(void)
 {
 	char	cwd[PATH_MAX];
-	
+	char	*oldpwd;
+	char	*pwd;
+
 	if (ft_getenv("PWD") == NULL)
 		return ;
 	getcwd(cwd, sizeof(cwd));
-	export_var(ft_strjoin(ft_strdup("OLDPWD="), ft_getenv("PWD")));
-	export_var(ft_strjoin(ft_strdup("PWD="), ft_strdup(cwd)));
+	oldpwd = ft_strjoin2(ft_strdup("OLDPWD="), ft_getenv("PWD"), 1, 0);
+	pwd = ft_strjoin2(ft_strdup("PWD="), ft_strdup(cwd), 1, 1);
+	export_var(oldpwd);
+	export_var(pwd);
+	free(oldpwd);
+	free(pwd);
 }
 
 void	cd(char **cmd)

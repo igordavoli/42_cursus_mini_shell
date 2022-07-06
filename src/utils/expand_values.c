@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 23:18:51 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/06/06 00:36:12 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/06 02:52:30 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**expand_values(char **value)
 	int		i;
 	int		j;
 	char	*temp;
-	
+
 	j = 0;
 	while (value[j])
 	{

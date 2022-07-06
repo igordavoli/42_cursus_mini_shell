@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 02:10:00 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/03 22:01:22 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/06 02:51:24 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	export_var(char *cmd)
 	if (!is_duplicate_var(cmd))
 	{
 		mall_cmd = ft_strdup(cmd);
-		if(mall_cmd == NULL)
+		if (mall_cmd == NULL)
 			return ;
 		new_cmd = ft_dlstnew((void *)mall_cmd);
-		if(new_cmd == NULL)
+		if (new_cmd == NULL)
 			return ;
 		else
 			ft_dlstadd_back(&g_msh.envp_lst, new_cmd);
@@ -62,7 +62,7 @@ static	int	is_valid_var(char *var)
 	int	i;
 
 	i = 0;
-	if(!ft_isalpha(var[i]) && var[i] != '_')
+	if (!ft_isalpha(var[i]) && var[i] != '_')
 		return (0);
 	while (var[i] != '\0' && var[i] != '=')
 	{

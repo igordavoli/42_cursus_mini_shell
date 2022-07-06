@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 02:18:04 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/05/30 23:21:37 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/07/06 03:06:28 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ char	*find_cmd_path(char *cmd)
 	{
 		whole_name = join_path(path_list[i], cmd);
 		if (access(whole_name, F_OK) == 0)
+		{
+			free_matrix(path_list);
 			return (whole_name);
+		}
 		free(whole_name);
 		i++;
 	}
+	free_matrix(path_list);
 	return (NULL);
 }

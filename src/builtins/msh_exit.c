@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 21:09:36 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/06/26 00:39:20 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/06 02:51:40 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	int	ft_str_isdigit(char *str)
 {
 	int	i;
-	
+
 	i = -1;
 	while (str[++i])
 		if (!(str[i] >= '0' && str[i] <= '9'))

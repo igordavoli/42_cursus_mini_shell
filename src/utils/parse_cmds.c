@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idavoli- <idavoli-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/06/01 00:19:42 by idavoli-         ###   ########.fr       */
+/*   Updated: 2022/07/06 02:52:45 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ char	***parse_cmds(char *cmds)
 	int		i;
 
 	n_cmds = count_cmds(cmds);
-	splitted_part = ft_split2(cmds, '|');
+	if (!ft_strncmp(cmds, "|", ft_strlen(cmds)))
+		splitted_part = ft_split2(cmds, '|');
+	else
+		splitted_part = &cmds;
 	splitted_full = (char ***)malloc(sizeof(char **) * (n_cmds + 1));
 	splitted_full[n_cmds] = NULL;
 	i = 0;
-	while(i < n_cmds)
+	while (i < n_cmds)
 	{
 		splitted_full[i] = ft_split2(splitted_part[i], ' ');
 		i++;

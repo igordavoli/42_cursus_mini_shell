@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/03 22:01:47 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/06 03:06:42 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	export_var(char *cmd);
 void	msh_exit(char **cmd);
 int		pwd(void);
 int		unset(char *env);
+int		ft_strcmp(char *s1, char *s2);
 /* ************************************************************************** */
 
 /* ************************************************************************** */
@@ -60,6 +61,7 @@ void	execute(char **cmd);
 char	**expand_values(char **value);
 char	*find_cmd_path(char *cmd);
 void	free_cmds(char ***cmds);
+void	free_matrix(char **matrix);
 char	*get_node_value(t_dlist *node);
 int		is_builtin(char *cmd);
 char	***parse_cmds(char *cmds);
