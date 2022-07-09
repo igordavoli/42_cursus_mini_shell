@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 21:09:36 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/06 02:51:40 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/09 21:10:55 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	msh_exit(char **cmd)
 	else if (cmd[1] != NULL && ft_str_isdigit(cmd[1]) == 1)
 		g_msh.exit_code = ft_atoi(cmd[1]);
 	status = g_msh.exit_code;
-	ft_dlstclear(&g_msh.envp_lst, &free);
-	free_cmds(g_msh.splitted_cmds);
-	free(g_msh.prompt);
+	free_all();
 	exit(status);
 }

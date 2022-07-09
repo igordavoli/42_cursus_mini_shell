@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 04:26:33 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/06 03:05:55 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/09 20:31:29 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,12 @@ char	*refresh_prompt(void)
 {
 	char	*prompt;
 	char	cwd[PATH_MAX];
-	char	*minihell;
 
 	if (g_msh.prompt)
 		free(g_msh.prompt);
-	prompt = ft_strjoin2("\033[1;36m", ft_getenv("USER"), 0, 0);
-	minihell = ft_strdup("\033[m at\033[3;1;31m miniHell\033[0;m in \033[1;34m");
-	prompt = ft_strjoin2(prompt, minihell, 1, 1);
+	prompt = ft_strjoin2(ft_getenv("USER"), " at miniHell in ", 0, 0);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		prompt = ft_strjoin2(prompt, get_dir(cwd), 1, 1);
-	g_msh.prompt = ft_strjoin2(prompt, "\033[0;m> ", 1, 0);
+	g_msh.prompt = ft_strjoin2(prompt, "> ", 1, 0);
 	return (g_msh.prompt);
 }

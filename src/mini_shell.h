@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/06 03:06:42 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/09 20:24:44 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		is_builtin(char *cmd);
 char	***parse_cmds(char *cmds);
 char	*refresh_prompt(void);
 void	signal_handler(int signum);
+void	free_all(void);
 /* ************************************************************************** */
 
 #endif
