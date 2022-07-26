@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/06/05 22:34:45 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/26 04:02:10 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 
 t_msh	g_msh;
 
-int	main(int argc, char **argv, char **envp)
+void	init_vars(int argc, char **argv, char **envp)
 {
-	int	i;
-
 	g_msh.argc = argc;
 	g_msh.argv = argv;
 	g_msh.envp = envp;
 	g_msh.prompt = NULL;
 	g_msh.envp_lst = create_list(envp);
+	g_msh.exit_code = 0;
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	int	i;
+
+	init_vars(argc, argv, envp);
 	while (1)
 	{
 		signal(SIGINT, signal_handler);
@@ -31,13 +37,17 @@ int	main(int argc, char **argv, char **envp)
 		if (*g_msh.line)
 		{
 			add_history(g_msh.line);
-			g_msh.splitted_cmds = parse_cmds(g_msh.line);
-			i = -1;
-			while (g_msh.splitted_cmds[++i])
-				execute(g_msh.splitted_cmds[i]);
-			free(g_msh.line);
+			parse_line(g_msh.line);
+			if (g_msh.error == 0)
+			{
+				g_msh.splitted_cmds = parse_cmds(g_msh.parsed_line);
+				i = -1;
+				while (g_msh.splitted_cmds[++i])
+					execute(g_msh.splitted_cmds[i]);
+			}
 			free_cmds(g_msh.splitted_cmds);
 		}
+		free(g_msh.line);
 	}
 	return (0);
 }
