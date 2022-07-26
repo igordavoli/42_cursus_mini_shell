@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 01:59:00 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/05 04:22:33 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/25 02:57:00 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 char	*ft_getenv(char *var)
 {
 	t_dlist	*head;
+	char	*tmp;
 
 	head = g_msh.envp_lst;
-	while (head != NULL)
+	while (head->next != NULL)
 	{
 		head = head->next;
-		if (!ft_strncmp(head->content, var, ft_strlen(var)))
-			break ;
+		tmp = head->content;
+		if (!ft_strncmp(head->content, var, ft_strlen(var)) \
+		&& !ft_strncmp(tmp + ft_strlen(var), "=", 1))
+			return (head->content + ft_strlen(var) + 1);
 	}
-	return (head->content + ft_strlen(var) + 1);
+	return ("\0");
 }
 
 static void	print(void *varenv)
