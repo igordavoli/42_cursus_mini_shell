@@ -44,8 +44,8 @@ int	main(int argc, char **argv, char **envp)
 				i = -1;
 				while (g_msh.splitted_cmds[++i])
 					execute(g_msh.splitted_cmds[i]);
+				free_cmds(g_msh.splitted_cmds);
 			}
-			free_cmds(g_msh.splitted_cmds);
 		}
 		free(g_msh.line);
 	}

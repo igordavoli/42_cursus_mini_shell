@@ -55,8 +55,8 @@ void	parse_variables(char *line, int *i)
 		*i = *i + 1;
 	else if (ft_isalpha(line[*i + 1]))
 	{
-		while (ft_isalpha(line[++*i]))
-			var = ft_strcjoin(var, line[*i]);
+		while (ft_isalpha(line[*i + 1]))
+			var = ft_strcjoin(var, line[++*i]);
 		g_msh.parsed_line = ft_strjoin2(\
 			g_msh.parsed_line, ft_getenv(var), 1, 0);
 		free(var);
@@ -77,7 +77,7 @@ void	parse_quotes(char *line, int *i, char quote)
 			g_msh.parsed_line = ft_strcjoin(g_msh.parsed_line, line[*i]);
 			return ;
 		}
-		if (line[*i] != '\0')
+		if (line[*i] != '\0' && line[*i] != '$')
 			g_msh.parsed_line = ft_strcjoin(g_msh.parsed_line, line[*i]);
 	}
 	write (STDOUT_FILENO, "Error: unclosed quotes\n", 24);
@@ -93,14 +93,12 @@ static void	parse_loop(char *line)
 	g_msh.error = 0;
 	while (line[++i] != '\0')
 	{
-		printf("1:%s\n", g_msh.parsed_line);
 		if (line[i] == '\"' || line[i] == '\'')
 			parse_quotes(line, &i, line[i]);
 		else if (line[i] == '$')
 			parse_variables(line, &i);
 		else if (line[i] != '\0')
 			g_msh.parsed_line = ft_strcjoin(g_msh.parsed_line, line[i]);
-		printf("2:%s\n", g_msh.parsed_line);
 		if (g_msh.error == 1 || line[i] == '\0')
 			return ;
 	}
