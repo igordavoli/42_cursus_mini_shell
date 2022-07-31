@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/26 04:08:44 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/07/31 02:18:11 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,32 @@ static int	count_cmds(char *cmds)
 		if (*cmds++ == '|')
 			n_cmds++;
 	return (n_cmds);
+}
+	
+static char	**split_space(char *str)
+{
+	int		i;
+	char	**cmd;
+	char	quote;
+
+	quote = '\0';
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			quote = str[i];
+			str[i] = 1;
+			while (str[i] != quote && str[i] != '\0')
+				i++;
+			str[i] = 1;
+		}
+		else if (str[i] == ' ')
+			str[i] = 1;
+		i++;
+	}
+	cmd = ft_split(str, 1);
+	return (cmd);
 }
 
 char	***parse_cmds(char *cmds)
@@ -40,7 +66,7 @@ char	***parse_cmds(char *cmds)
 	i = 0;
 	while (i < n_cmds)
 	{
-		splitted_full[i] = ft_split(splitted_part[i], ' ');
+		splitted_full[i] = split_space(splitted_part[i]);
 		i++;
 	}
 	return (splitted_full);
