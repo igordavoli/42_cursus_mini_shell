@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 23:11:51 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/07/26 03:53:59 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/01 03:20:22 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,47 @@ void	parse_quotes(char *line, int *i, char quote)
 	g_msh.exit_code = 1;
 }
 
+int	check_syntax_error(char c)
+{
+	if (c == '|' || c == '&' || c == ';' || c == '(' \
+	|| c == ')' || c == '<' || c == '>' || c == '\0')
+	{
+		ft_putstr_fd("miniHell: syntax error near unexpected token `", 2);
+		if (c == '\0')
+			ft_putstr_fd("newline", 2);
+		else
+			ft_putchar_fd(c, 2);
+		ft_putstr_fd("'\n", 2);
+		g_msh.error = 1;
+		g_msh.exit_code = 2;
+		return (1);
+	}
+	return (0);
+}
+
+void	parse_redirect(char *line, int *i, char operator)
+{
+	char	*file;
+
+	file = NULL;
+	*i = *i + 1;
+	if (line[*i] == operator)
+	{
+		g_msh.operator = operator;
+		*i = *i + 1;
+	}
+	while (line[*i] == ' ')
+		*i = *i + 1;
+	if (check_syntax_error(line[*i]))
+		return ;
+	while (line[*i] != '\0' && ft_isalnum(line[*i]))
+	{
+		file = ft_strcjoin(file, line[*i]);
+		*i = *i + 1;
+	}
+	free(file);
+}
+
 static void	parse_loop(char *line)
 {
 	int	i;
@@ -97,6 +138,8 @@ static void	parse_loop(char *line)
 			parse_quotes(line, &i, line[i]);
 		else if (line[i] == '$')
 			parse_variables(line, &i);
+		else if (line[i] == '<' || line[i] == '>')
+			parse_redirect(line, &i, line[i]);
 		else if (line[i] != '\0')
 			g_msh.parsed_line = ft_strcjoin(g_msh.parsed_line, line[i]);
 		if (g_msh.error == 1 || line[i] == '\0')
