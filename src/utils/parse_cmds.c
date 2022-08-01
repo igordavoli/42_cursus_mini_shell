@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/31 02:18:11 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/01 00:19:28 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	count_cmds(char *cmds)
 			n_cmds++;
 	return (n_cmds);
 }
-	
+
 static char	**split_space(char *str)
 {
 	int		i;

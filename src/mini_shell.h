@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/26 03:55:18 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/01 03:48:20 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_msh
 	int		exit_code;
 	char	*parsed_line;
 	int		error;
+	char	operator;
 }	t_msh;
 
 extern t_msh	g_msh;
@@ -69,6 +70,10 @@ char	*refresh_prompt(void);
 void	signal_handler(int signum);
 void	free_all(void);
 void	parse_line(char *line);
+char	*ft_strcjoin(char *s1, char s2);
+void	parse_variables(char *line, int *i);
+void	parse_quotes(char *line, int *i, char quote);
+void	parse_redirect(char *line, int *i, char operator);
 /* ************************************************************************** */
 
 #endif

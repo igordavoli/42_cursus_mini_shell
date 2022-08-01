@@ -12,7 +12,7 @@ VALGRIND	+=	-s $(SUPP_SRC)
 
 LIBFT		=	libs/libft/libft.a
 
-NAME		=	mini_shell
+NAME		=	minishell
 SRC_DIR		=	src
 OBJ_DIR		=	objects
 HEADER		=	$(SRC_DIR)/mini_shell.h
@@ -35,7 +35,8 @@ SRC_FILES	+=	utils/is_builtin.c \
 				utils/free_cmds.c \
 				utils/parse_cmds.c \
 				utils/get_node_value.c \
-				utils/parse_line.c
+				utils/parse_line.c \
+				utils/parse_chars.c
 
 SRC_FILES	+=	builtins/echo.c \
 				builtins/cd.c \
