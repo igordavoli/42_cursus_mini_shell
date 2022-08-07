@@ -36,10 +36,10 @@ static char	**split_space(char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			quote = str[i];
-			str[i] = 1;
+			str[i] = 2;
 			while (str[i] != quote && str[i] != '\0')
 				i++;
-			str[i] = 1;
+			str[i] = 2;
 		}
 		else if (str[i] == ' ')
 			str[i] = 1;
