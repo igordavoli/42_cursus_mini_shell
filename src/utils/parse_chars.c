@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 03:17:11 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/08/08 02:19:21 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/09 00:52:48 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	parse_redirect(char *line, int *i, char operator)
 	dup2(g_msh.save_stdin, STDIN_FILENO);
 	file = NULL;
 	*i = *i + 1;
+	g_msh.operator = '\0';
 	if (line[*i] == operator)
 	{
 		g_msh.operator = operator;

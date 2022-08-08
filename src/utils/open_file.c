@@ -16,14 +16,14 @@ void	open_file_output(void)
 {
 	if (g_msh.file_out != NULL)
 	{
-		if (access(g_msh.file_out, F_OK) == -1)
-			g_msh.fdout = open(g_msh.file_out, O_CREAT | O_WRONLY);
-		else if (access(g_msh.file_out, F_OK) == -1 && g_msh.operator == '>')
+		if (access(g_msh.file_out, F_OK) == -1 && g_msh.operator == '>')
 			g_msh.fdout = open(g_msh.file_out, O_CREAT | \
 				O_WRONLY | O_APPEND, 0644);
+		else if (access(g_msh.file_out, F_OK) == -1 && g_msh.operator == '\0')
+			g_msh.fdout = open(g_msh.file_out, O_CREAT | O_WRONLY);
 		else if (access(g_msh.file_out, F_OK) == 0 && g_msh.operator == '>')
 			g_msh.fdout = open(g_msh.file_out, O_WRONLY | O_APPEND);
-		else if (access(g_msh.file_out, F_OK) == 0)
+		else if (access(g_msh.file_out, F_OK) == 0 && g_msh.operator == '\0')
 			g_msh.fdout = open(g_msh.file_out, O_WRONLY | O_TRUNC);
 		dup2(g_msh.fdout, STDOUT_FILENO);
 		free(g_msh.file_out);
