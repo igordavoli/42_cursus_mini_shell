@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:49:15 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/24 22:18:30 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/08 02:52:43 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void	free_all(void)
 	free_cmds(g_msh.splitted_cmds);
 	free(g_msh.prompt);
 	free(g_msh.parsed_line);
+	close(g_msh.save_stdin);
+	close(g_msh.save_stdout);
 	rl_clear_history();
 }

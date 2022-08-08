@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/01 03:48:20 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/04 02:57:09 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define MINI_SHELL_H
 
 # include "../libs/libft/src/libft.h"
-# include <stdio.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <errno.h>
 # include <signal.h>
+# include <stdio.h>
 # include <wait.h>
 
 typedef struct s_msh
@@ -34,6 +36,14 @@ typedef struct s_msh
 	char	*parsed_line;
 	int		error;
 	char	operator;
+	int		fd[2];
+	int		fdin;
+	int		fdout;
+	int		save_stdin;
+	int		save_stdout;
+	char	*file_out;
+	char	*file_in;
+	pid_t	pid;
 }	t_msh;
 
 extern t_msh	g_msh;
@@ -74,6 +84,9 @@ char	*ft_strcjoin(char *s1, char s2);
 void	parse_variables(char *line, int *i);
 void	parse_quotes(char *line, int *i, char quote);
 void	parse_redirect(char *line, int *i, char operator);
+int		check_syntax_error(char c);
+void	check_directory_error(char *file);
+void	open_file_output(void);
 /* ************************************************************************** */
 
 #endif
