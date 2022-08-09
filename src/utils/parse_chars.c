@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 03:17:11 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/08/09 00:52:48 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/09 01:58:50 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,10 @@ void	add_redirect(char *file, char operator)
 	check_directory_error(file);
 	if (operator == '<')
 	{
-		if (g_msh.file_in != NULL)
-		{
-			free(g_msh.file_in);
-			close(g_msh.fdin);
-		}
 		g_msh.file_in = file;
-		// open_file_input();
+		open_file_input();
+		free(g_msh.file_in);
+		close(g_msh.fdin);
 	}
 	if (operator == '>')
 	{

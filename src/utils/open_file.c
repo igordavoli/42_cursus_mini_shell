@@ -12,6 +12,37 @@
 
 #include "../mini_shell.h"
 
+void	open_file_input(void)
+{
+	if (g_msh.file_in != NULL)
+	{
+		if (access(g_msh.file_in, F_OK | R_OK) == -1 && g_msh.operator == '\0')
+		{
+			write (2, g_msh.file_in, ft_strlen(g_msh.file_in));
+			write (2, ": No such file or directory\n", 28);
+			g_msh.error = 1;
+			g_msh.exit_code = 1;
+			return ;
+		}
+		else if (access(g_msh.file_in, F_OK | R_OK) == 0 \
+					&& g_msh.operator == '\0')
+		{
+			printf("aqui\n");
+			g_msh.fdin = open(g_msh.file_in, O_RDONLY);
+		}
+		else if (g_msh.operator == '<')
+		{
+			// g_msh.here_doc = 1;
+			// signal (SIGQUIT, SIG_IGN);
+			// open_delimiter(list);
+			// signal (SIGQUIT, quit_core);
+			// g_msh.here_doc = 0;
+		}
+		printf("aqui\n");
+		dup2 (g_msh.fdin, STDIN_FILENO);
+	}
+}
+
 void	open_file_output(void)
 {
 	if (g_msh.file_out != NULL)

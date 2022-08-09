@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/04 02:57:09 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/09 01:37:11 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	parse_redirect(char *line, int *i, char operator);
 int		check_syntax_error(char c);
 void	check_directory_error(char *file);
 void	open_file_output(void);
+void	open_file_input(void);
 /* ************************************************************************** */
 
 #endif
