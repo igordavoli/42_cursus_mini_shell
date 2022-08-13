@@ -12,6 +12,35 @@
 
 #include "../mini_shell.h"
 
+void	open_delimiter(void)
+{
+	int		fd;
+	char	*line;
+
+	if (access(".here_doc", F_OK))
+		unlink(".here_doc");
+	fd = open(".here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	while (1)
+	{
+		line = readline("heredoc> ");
+		if (line == NULL || ft_strcmp(line, g_msh.file_in) == 1)
+		{
+			if (line != NULL)
+				free (line);
+			if (line == NULL && g_msh.error == 0)
+				printf("warning: here-document delimited by"
+					" end-of-file (wanted `%s')\n", g_msh.file_in);
+			close(fd);
+			g_msh.fdin = open(".here_doc", O_RDONLY);
+			unlink(".here_doc");
+			return ;
+		}
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+	}
+}
+
 void	open_file_input(void)
 {
 	if (g_msh.file_in != NULL)
@@ -26,19 +55,13 @@ void	open_file_input(void)
 		}
 		else if (access(g_msh.file_in, F_OK | R_OK) == 0 \
 					&& g_msh.operator == '\0')
-		{
-			printf("aqui\n");
 			g_msh.fdin = open(g_msh.file_in, O_RDONLY);
-		}
 		else if (g_msh.operator == '<')
 		{
-			// g_msh.here_doc = 1;
-			// signal (SIGQUIT, SIG_IGN);
-			// open_delimiter(list);
-			// signal (SIGQUIT, quit_core);
-			// g_msh.here_doc = 0;
+			g_msh.here_doc = 1;
+			open_delimiter();
+			g_msh.here_doc = 0;
 		}
-		printf("aqui\n");
 		dup2 (g_msh.fdin, STDIN_FILENO);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/09 03:02:52 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/11 03:31:43 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	main(int argc, char **argv, char **envp)
 			parse_line(g_msh.line);
 			if (g_msh.error == 0 && g_msh.parsed_line)
 			{
-				printf("parsed line: %s\n", g_msh.parsed_line);
 				g_msh.splitted_cmds = parse_cmds(g_msh.parsed_line);					
 				i = -1;
 				while (g_msh.splitted_cmds[++i])

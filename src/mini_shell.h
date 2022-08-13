@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/09 01:37:11 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/11 03:09:35 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_msh
 	char	*file_out;
 	char	*file_in;
 	pid_t	pid;
+	int		here_doc;
 }	t_msh;
 
 extern t_msh	g_msh;
