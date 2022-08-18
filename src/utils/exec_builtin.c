@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:17:09 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/03 00:01:01 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/17 02:56:09 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	exec_builtin(char **cmd)
 {
+	// printf("file_out: %s; last_cmd: %d\n", g_msh.file_out, g_msh.last_cmd);
+	if (g_msh.file_out == NULL && g_msh.last_cmd == 0)
+		dup2(g_msh.fd[1], STDOUT_FILENO);
 	if (!ft_strncmp(*cmd, "echo", 5))
 		echo(cmd);
 	if (!ft_strncmp(*cmd, "cd", 3))
@@ -28,5 +31,9 @@ int	exec_builtin(char **cmd)
 		env();
 	if (!ft_strncmp(*cmd, "exit", 5))
 		msh_exit(cmd);
+	dup2(g_msh.fd[0], STDIN_FILENO);
+	dup2(g_msh.save_stdout, STDOUT_FILENO);
+	close(g_msh.fd[0]);
+	close(g_msh.fd[1]);
 	return (0);
 }

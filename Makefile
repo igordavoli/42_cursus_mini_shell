@@ -1,13 +1,14 @@
 .PHONY: all clean fclean re cleanb fcleanb reb
 
 CC			=	gcc
-CFLAGS		=	-g3 -Wall -Wextra -Werror
+CFLAGS		=	-g -Wall -Wextra -Werror
 RL_FLAG		=	-lreadline
 
 SUPP_FILES	=	readline.supp add_history.supp
 SUPP_PRFX	=	--suppressions=./supps
 SUPP_SRC	=	$(addprefix $(SUPP_PRFX)/, $(SUPP_FILES))
-VALGRIND	=	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all
+VALGRIND	=	valgrind --track-origins=yes --leak-check=full \
+				--show-leak-kinds=all --track-fds=yes --trace-children=yes
 VALGRIND	+=	-s $(SUPP_SRC)
 
 LIBFT		=	libs/libft/libft.a

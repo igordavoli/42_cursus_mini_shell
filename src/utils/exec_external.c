@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:48:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/09 20:37:21 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/15 03:31:55 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 int	exec_external(char **cmd)
 {
-	pid_t	pid;
 	char	*path;
 
-	pid = fork();
-	if (!pid)
+	close(g_msh.fd[0]);
+	if (g_msh.file_out == NULL && g_msh.last_cmd == 0)
+		dup2(g_msh.fd[1], STDOUT_FILENO);
+	if (g_msh.file_in != NULL)
 	{
-		path = find_cmd_path(*cmd);
-		if (execve(path, cmd, g_msh.envp) == -1)
-		{
-			printf("Error: can not exec: %s\n", *cmd);
-			free(path);
-			free_all();
-		}
+		dup2(g_msh.fdin, STDIN_FILENO);
+		close (g_msh.fdin);
 	}
-	wait(NULL);
-	if (pid == 0)
-		exit(0);
+	close(g_msh.fd[1]);
+	close(g_msh.save_stdin);
+	close(g_msh.save_stdout);
+	path = find_cmd_path(*cmd);
+	if (execve(path, cmd, g_msh.envp) == -1)
+	{
+		printf("Error: can not exec: %s\n", *cmd);
+		free(path);
+		free_all();
+		exit (1);
+	}
 	return (0);
 }

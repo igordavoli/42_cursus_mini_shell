@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:49:15 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/08 02:52:43 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/17 04:15:32 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ void	free_matrix(char **matrix)
 
 void	free_all(void)
 {
-	ft_dlstclear(&g_msh.envp_lst, &free);
 	free_cmds(g_msh.splitted_cmds);
+	// free(g_msh.parsed_line);
 	free(g_msh.prompt);
-	free(g_msh.parsed_line);
+	ft_dlstclear(&g_msh.envp_lst, &free);
 	close(g_msh.save_stdin);
 	close(g_msh.save_stdout);
+	close(g_msh.fd[0]);
+	close(g_msh.fd[1]);
 	rl_clear_history();
 }

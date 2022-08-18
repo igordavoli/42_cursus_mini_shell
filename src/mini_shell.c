@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/11 03:31:43 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/15 01:41:44 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ int	main(int argc, char **argv, char **envp)
 	init_vars(argc, argv, envp);
 	while (1)
 	{
+		g_msh.last_cmd = 0;
 		signal(SIGINT, signal_handler);
 		signal(SIGSEGV, exit);
-		dup2(g_msh.save_stdin, STDIN_FILENO);
-		dup2(g_msh.save_stdout, STDOUT_FILENO);
 		g_msh.line = readline(refresh_prompt());
 		if (*g_msh.line)
 		{
@@ -48,11 +47,17 @@ int	main(int argc, char **argv, char **envp)
 				g_msh.splitted_cmds = parse_cmds(g_msh.parsed_line);					
 				i = -1;
 				while (g_msh.splitted_cmds[++i])
+				{
+					if (g_msh.splitted_cmds[i + 1] == NULL)
+						g_msh.last_cmd = 1;
 					execute(g_msh.splitted_cmds[i]);
+				}
 				free_cmds(g_msh.splitted_cmds);
 			}
 		}
 		free(g_msh.line);
+		dup2(g_msh.save_stdin, STDIN_FILENO);
+		dup2(g_msh.save_stdout, STDOUT_FILENO);
 	}
 	return (0);
 }
