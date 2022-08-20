@@ -6,13 +6,19 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/15 01:41:44 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:07:33 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
 t_msh	g_msh;
+
+void	signal_exit(int signum)
+{
+	free_all();
+	exit(signum);
+}
 
 void	init_vars(int argc, char **argv, char **envp)
 {
@@ -34,9 +40,9 @@ int	main(int argc, char **argv, char **envp)
 	init_vars(argc, argv, envp);
 	while (1)
 	{
-		g_msh.last_cmd = 0;
 		signal(SIGINT, signal_handler);
-		signal(SIGSEGV, exit);
+		signal(SIGSEGV, signal_exit);
+		g_msh.last_cmd = 0;
 		g_msh.line = readline(refresh_prompt());
 		if (*g_msh.line)
 		{

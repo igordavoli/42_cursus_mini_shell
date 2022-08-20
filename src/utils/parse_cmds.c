@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/17 04:17:19 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/19 03:18:45 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static char	**split_space(char *str)
 		i++;
 	}
 	cmd = ft_split(str, 1);
-	// free(str);
 	return (cmd);
 }
 
@@ -58,21 +57,16 @@ char	***parse_cmds(char *cmds)
 	int		i;
 
 	n_cmds = count_cmds(cmds);
-	if (n_cmds > 1)
-		splitted_part = ft_split(cmds, '|');
-	else
-		splitted_part = &cmds;
+	splitted_part = ft_split(cmds, '|');
 	splitted_full = (char ***)malloc(sizeof(char **) * (n_cmds + 1));
 	splitted_full[n_cmds] = NULL;
 	i = 0;
 	while (i < n_cmds)
 	{
 		splitted_full[i] = split_space(splitted_part[i]);
-		// if (splitted_part[i])
 		free(splitted_part[i]);
 		i++;
 	}
-	// if (splitted_part)
 	free(splitted_part);
 	return (splitted_full);
 }

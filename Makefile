@@ -8,8 +8,8 @@ SUPP_FILES	=	readline.supp add_history.supp
 SUPP_PRFX	=	--suppressions=./supps
 SUPP_SRC	=	$(addprefix $(SUPP_PRFX)/, $(SUPP_FILES))
 VALGRIND	=	valgrind --track-origins=yes --leak-check=full \
-				--show-leak-kinds=all --track-fds=yes --trace-children=yes
-VALGRIND	+=	-s $(SUPP_SRC)
+				--show-leak-kinds=all --track-fds=yes
+VALGRIND	+=	$(SUPP_SRC)
 
 LIBFT		=	libs/libft/libft.a
 
