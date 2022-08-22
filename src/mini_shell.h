@@ -35,16 +35,16 @@ typedef struct s_msh
 	int		exit_code;
 	char	*parsed_line;
 	int		error;
-	char	operator;
+	char	*file_name;
+	char	redirect;
+	int		doble_redirect;
+	int		here_doc;
 	int		fd[2];
 	int		fdin;
 	int		fdout;
 	int		save_stdin;
 	int		save_stdout;
-	char	*file_out;
-	char	*file_in;
 	pid_t	pid;
-	int		here_doc;
 	int		last_cmd;
 }	t_msh;
 

@@ -23,13 +23,13 @@ void	open_delimiter(void)
 	while (1)
 	{
 		line = readline("heredoc> ");
-		if (line == NULL || ft_strcmp(line, g_msh.file_in) == 1)
+		if (line == NULL || ft_strcmp(line, g_msh.file_name) == 1)
 		{
 			if (line != NULL)
 				free (line);
 			if (line == NULL && g_msh.error == 0)
 				printf("warning: here-document delimited by"
-					" end-of-file (wanted `%s')\n", g_msh.file_in);
+					" end-of-file (wanted `%s')\n", g_msh.file_name);
 			close(fd);
 			g_msh.fdin = open(".here_doc", O_RDONLY);
 			unlink(".here_doc");
@@ -43,44 +43,45 @@ void	open_delimiter(void)
 
 void	open_file_input(void)
 {
-	if (g_msh.file_in != NULL)
+	if (g_msh.doble_redirect == 1)
 	{
-		if (access(g_msh.file_in, F_OK | R_OK) == -1 && g_msh.operator == '\0')
+		g_msh.here_doc = 1;
+		open_delimiter();
+		g_msh.here_doc = 0;
+	}
+	else
+	{
+		if (access(g_msh.file_name, F_OK | R_OK) == -1)
 		{
-			write (2, g_msh.file_in, ft_strlen(g_msh.file_in));
+			write (2, g_msh.file_name, ft_strlen(g_msh.file_name));
 			write (2, ": No such file or directory\n", 28);
 			g_msh.error = 1;
 			g_msh.exit_code = 1;
 			return ;
 		}
-		else if (access(g_msh.file_in, F_OK | R_OK) == 0 \
-					&& g_msh.operator == '\0')
-			g_msh.fdin = open(g_msh.file_in, O_RDONLY);
-		else if (g_msh.operator == '<')
-		{
-			g_msh.here_doc = 1;
-			open_delimiter();
-			g_msh.here_doc = 0;
-		}
-		dup2 (g_msh.fdin, STDIN_FILENO);
+		else
+			g_msh.fdin = open(g_msh.file_name, O_RDONLY);
 	}
+	dup2(g_msh.fdin, STDIN_FILENO);
+	close(g_msh.fdin);
 }
 
 void	open_file_output(void)
 {
-	if (g_msh.file_out != NULL)
+	if (g_msh.doble_redirect == 1)
 	{
-		if (access(g_msh.file_out, F_OK) == -1 && g_msh.operator == '>')
-			g_msh.fdout = open(g_msh.file_out, O_CREAT | \
-				O_WRONLY | O_APPEND, 0644);
-		else if (access(g_msh.file_out, F_OK) == -1 && g_msh.operator == '\0')
-			g_msh.fdout = open(g_msh.file_out, O_CREAT | O_WRONLY);
-		else if (access(g_msh.file_out, F_OK) == 0 && g_msh.operator == '>')
-			g_msh.fdout = open(g_msh.file_out, O_WRONLY | O_APPEND);
-		else if (access(g_msh.file_out, F_OK) == 0 && g_msh.operator == '\0')
-			g_msh.fdout = open(g_msh.file_out, O_WRONLY | O_TRUNC);
-		dup2(g_msh.fdout, STDOUT_FILENO);
-		free(g_msh.file_out);
-		close(g_msh.fdout);
+		if (access(g_msh.file_name, F_OK) == -1)
+			g_msh.fdout = open(g_msh.file_name,	O_CREAT | O_WRONLY | O_APPEND);
+		else
+			g_msh.fdout = open(g_msh.file_name, O_WRONLY | O_APPEND);
 	}
+	else
+	{
+		if (access(g_msh.file_name, F_OK) == -1)
+			g_msh.fdout = open(g_msh.file_name, O_CREAT | O_WRONLY);
+		else
+			g_msh.fdout = open(g_msh.file_name, O_WRONLY | O_TRUNC);
+	}
+	// dup2(g_msh.fdout, STDOUT_FILENO);
+	// close(g_msh.fdout);
 }

@@ -57,34 +57,14 @@ void	parse_quotes(char *line, int *i, char quote)
 	g_msh.exit_code = 1;
 }
 
-void	add_redirect(char *file, char operator)
+void	parse_redirect(char *line, int *i, char redirect)
 {
-	check_directory_error(file);
-	if (operator == '<')
-	{
-		g_msh.file_in = file;
-		open_file_input();
-		free(g_msh.file_in);
-		close(g_msh.fdin);
-	}
-	if (operator == '>')
-	{
-		g_msh.file_out = file;
-		open_file_output();
-	}
-}
-
-void	parse_redirect(char *line, int *i, char operator)
-{
-	char	*file;
-
 	dup2(g_msh.save_stdin, STDIN_FILENO);
-	file = NULL;
 	*i = *i + 1;
-	g_msh.operator = '\0';
-	if (line[*i] == operator)
+	g_msh.redirect = redirect;
+	if (line[*i] == redirect)
 	{
-		g_msh.operator = operator;
+		g_msh.doble_redirect = 1;
 		*i = *i + 1;
 	}
 	while (line[*i] == ' ')
@@ -93,8 +73,12 @@ void	parse_redirect(char *line, int *i, char operator)
 		return ;
 	while (line[*i] != '\0' && line[*i] != ' ' && !check_syntax_error(line[*i]))
 	{
-		file = ft_strcjoin(file, line[*i]);
+		g_msh.file_name = ft_strcjoin(g_msh.file_name, line[*i]);
 		*i = *i + 1;
 	}
-	add_redirect(file, operator);
+	check_directory_error(g_msh.file_name);
+	if (redirect == '>')
+		open_file_output();
+	else if (redirect == '<')
+		open_file_input();
 }
