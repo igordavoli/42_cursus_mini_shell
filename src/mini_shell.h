@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/14 22:02:16 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:39:00 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,29 @@ int		ft_strcmp(char *s1, char *s2);
 /* ************************************************************************** */
 /* ********************************* UTILS ********************************** */
 /* ************************************************************************** */
+int		check_syntax_error(char c);
+void	check_directory_error(char *file);
 t_dlist	*create_list(char **strs);
 int		exec_builtin(char **cmd);
 int		exec_external(char **cmd);
 void	execute(char **cmd);
 char	*find_cmd_path(char *cmd);
+void	free_all(void);
 void	free_cmds(char ***cmds);
 void	free_matrix(char **matrix);
+char	*ft_strcjoin(char *s1, char s2);
 char	*get_node_value(t_dlist *node);
 int		is_builtin(char *cmd);
+void	open_file_input(void);
+void	open_file_output(void);
 char	***parse_cmds(char *cmds);
-char	*refresh_prompt(void);
-void	signal_handler(int signum);
-void	free_all(void);
 void	parse_line(char *line);
-char	*ft_strcjoin(char *s1, char s2);
-void	parse_variables(char *line, int *i);
 void	parse_quotes(char *line, int *i, char quote);
 void	parse_redirect(char *line, int *i, char operator);
-int		check_syntax_error(char c);
-void	check_directory_error(char *file);
-void	open_file_output(void);
-void	open_file_input(void);
+void	parse_variables(char *line, int *i);
+char	*refresh_prompt(void);
+void	signal_exit(int signum);
+void	signal_handler(int signum);
 /* ************************************************************************** */
 
 #endif

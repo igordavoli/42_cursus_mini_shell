@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 00:55:51 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/22 01:57:26 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:42:30 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,9 @@ t_dlist	*create_list(char **strs)
 		if (ft_strnstr(strs[i], "WORKSPACE", ft_strlen(strs[i])) == NULL)
 			ft_dlstadd_back(&envp_lst, ft_dlstnew((void *)ft_strdup(strs[i])));
 	return (envp_lst);
+}
+
+char	*get_node_value(t_dlist *node)
+{
+	return ((char *)node->content);
 }

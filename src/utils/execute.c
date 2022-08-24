@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 23:20:18 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/22 00:12:03 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:15:31 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	parent_command(void)
 
 void	execute(char **cmd)
 {
-	printf("file: %s; is_last: %d; redirect: %c; doble: %d \n", g_msh.file_name, g_msh.last_cmd, g_msh.redirect, g_msh.doble_redirect);
 	if (pipe(g_msh.fd) == -1)
 		exit (-1);
 	if (g_msh.last_cmd == 0)

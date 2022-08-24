@@ -71,7 +71,7 @@ void	open_file_output(void)
 	if (g_msh.doble_redirect == 1)
 	{
 		if (access(g_msh.file_name, F_OK) == -1)
-			g_msh.fdout = open(g_msh.file_name,	O_CREAT | O_WRONLY | O_APPEND);
+			g_msh.fdout = open(g_msh.file_name, O_CREAT | O_WRONLY | O_APPEND);
 		else
 			g_msh.fdout = open(g_msh.file_name, O_WRONLY | O_APPEND);
 	}
@@ -82,6 +82,4 @@ void	open_file_output(void)
 		else
 			g_msh.fdout = open(g_msh.file_name, O_WRONLY | O_TRUNC);
 	}
-	// dup2(g_msh.fdout, STDOUT_FILENO);
-	// close(g_msh.fdout);
 }

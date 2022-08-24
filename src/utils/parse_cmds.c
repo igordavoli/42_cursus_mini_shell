@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/19 03:18:45 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:11:56 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static char	**split_space(char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			quote = str[i];
-			str[i] = 2;
+			str[i] = 1;
 			while (str[i] != quote && str[i] != '\0')
 				i++;
-			str[i] = 2;
+			str[i] = 1;
 		}
 		else if (str[i] == ' ')
 			str[i] = 1;

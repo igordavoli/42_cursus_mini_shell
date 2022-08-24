@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:48:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/21 01:04:04 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:30:06 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	exec_external(char **cmd)
 	char	*path;
 
 	close(g_msh.fd[0]);
-	if (g_msh.file_name == NULL && g_msh.last_cmd == 0) // file_out
+	if (g_msh.file_name == NULL && g_msh.last_cmd == 0)
 		dup2(g_msh.fd[1], STDOUT_FILENO);
-	if (g_msh.file_name != NULL) // file_in
+	if (g_msh.file_name != NULL)
 	{
 		dup2(g_msh.fdin, STDIN_FILENO);
 		close (g_msh.fdin);

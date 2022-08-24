@@ -25,8 +25,7 @@ HEADER_B	=	$(SRC_DIR_B)/checker.h
 
 SRC_FILES	=	mini_shell.c \
 
-SRC_FILES	+=	utils/is_builtin.c \
-				utils/exec_builtin.c \
+SRC_FILES	+=	utils/exec_builtin.c \
 				utils/create_list.c \
 				utils/execute.c\
 				utils/refresh_prompt.c \
@@ -35,7 +34,6 @@ SRC_FILES	+=	utils/is_builtin.c \
 				utils/exec_external.c \
 				utils/free_cmds.c \
 				utils/parse_cmds.c \
-				utils/get_node_value.c \
 				utils/parse_line.c \
 				utils/parse_chars.c \
 				utils/check_error.c \

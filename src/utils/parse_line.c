@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 23:11:51 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/08/07 22:55:11 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:45:49 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ char	*ft_strcjoin(char *s1, char s2)
 	return (s);
 }
 
-static void	parse_loop(char *line)
+void	parse_line(char *line)
 {
 	int	i;
 
+	if (g_msh.parsed_line)
+		free(g_msh.parsed_line);
+	g_msh.parsed_line = NULL;
 	i = -1;
 	g_msh.error = 0;
 	while (line[++i] != '\0')
@@ -59,12 +62,4 @@ static void	parse_loop(char *line)
 		if (g_msh.error == 1 || line[i] == '\0')
 			return ;
 	}
-}
-
-void	parse_line(char *line)
-{
-	if (g_msh.parsed_line)
-		free(g_msh.parsed_line);
-	g_msh.parsed_line = NULL;
-	parse_loop(line);
 }
