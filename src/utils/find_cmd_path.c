@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 02:18:04 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/06 03:06:28 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/25 03:37:36 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ char	*find_cmd_path(char *cmd)
 	while (path_list[i])
 	{
 		whole_name = join_path(path_list[i], cmd);
-		if (access(whole_name, F_OK) == 0)
+		if (!access(cmd, F_OK) || !access(whole_name, F_OK))
 		{
 			free_matrix(path_list);
-			return (whole_name);
+			if (!access(cmd, F_OK))
+				return (cmd);
+			else if (!access(whole_name, F_OK))
+				return (whole_name);
 		}
 		free(whole_name);
 		i++;
