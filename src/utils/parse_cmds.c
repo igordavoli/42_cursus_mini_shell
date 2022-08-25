@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/24 01:11:56 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/25 03:35:23 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ static int	count_cmds(char *cmds)
 	return (n_cmds);
 }
 
+static void	ft_remchar(char *str, char chr)
+{
+	int	writer;
+	int	reader;
+
+	writer = 0;
+	reader = 0;
+	while (str[reader])
+	{
+		if (str[reader] != chr) 
+			str[writer++] = str[reader];
+		reader++;
+	}
+	str[writer] = 0;
+}
+
 static char	**split_space(char *str)
 {
 	int		i;
@@ -36,15 +52,16 @@ static char	**split_space(char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			quote = str[i];
-			str[i] = 1;
+			str[i] = 2;
 			while (str[i] != quote && str[i] != '\0')
 				i++;
-			str[i] = 1;
+			str[i] = 2;
 		}
 		else if (str[i] == ' ')
 			str[i] = 1;
 		i++;
 	}
+	ft_remchar(str, 2);
 	cmd = ft_split(str, 1);
 	return (cmd);
 }
