@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:17:09 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/24 01:41:48 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/25 03:37:47 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_builtin(char *cmd)
 {
+	if (cmd == NULL)
+		return (0);
 	if (!ft_strncmp(cmd, "echo", 5)
 		|| !ft_strncmp(cmd, "cd", 3)
 		|| !ft_strncmp(cmd, "pwd", 4)

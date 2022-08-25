@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/24 01:55:21 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/25 00:49:54 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_vars(int argc, char **argv, char **envp)
 	g_msh.argc = argc;
 	g_msh.argv = argv;
 	g_msh.envp = envp;
+	g_msh.parsed_line = NULL;
 	g_msh.envp_lst = create_list(envp);
 	g_msh.save_stdin = dup(STDIN_FILENO);
 	g_msh.save_stdout = dup(STDOUT_FILENO);
@@ -29,7 +30,6 @@ void	init_vars_loop(void)
 	g_msh.last_cmd = 0;
 	g_msh.doble_redirect = 0;
 	g_msh.redirect = 0;
-	g_msh.parsed_line = NULL;
 	g_msh.file_name = NULL;
 	g_msh.line = NULL;
 	g_msh.splitted_cmds = NULL;

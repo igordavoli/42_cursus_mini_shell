@@ -28,12 +28,13 @@ int	exec_external(char **cmd)
 	close(g_msh.save_stdin);
 	close(g_msh.save_stdout);
 	path = find_cmd_path(*cmd);
-	if (execve(path, cmd, g_msh.envp) == -1)
+	if (path == NULL)
 	{
 		printf("Error: can not exec: %s\n", *cmd);
 		free(path);
 		free_all();
 		exit (1);
 	}
+	execve(path, cmd, g_msh.envp);
 	return (0);
 }
