@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 21:07:40 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/08/24 01:34:38 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/27 04:33:20 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	signal_handler(int signum)
 		g_msh.error = 1;
 		write (1, "\n", 1);
 	}
+	else if (g_msh.pid != 0)
+	{
+		kill(g_msh.pid, SIGKILL);
+		write (1, "\n", 1);
+	}
 	else
 	{
 		write (1, "\n", 1);
@@ -33,6 +38,7 @@ void	signal_handler(int signum)
 
 void	signal_exit(int signum)
 {
+	write (1, "\n", 1);
 	free_all();
 	exit(signum);
 }
