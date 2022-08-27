@@ -30,7 +30,6 @@ void	init_vars_loop(void)
 	g_msh.last_cmd = 0;
 	g_msh.doble_redirect = 0;
 	g_msh.redirect = 0;
-	g_msh.file_name = NULL;
 	g_msh.line = NULL;
 	g_msh.splitted_cmds = NULL;
 }
@@ -67,7 +66,6 @@ int	main(int argc, char **argv, char **envp)
 		if (*g_msh.line)
 			execute_line();
 		free(g_msh.line);
-		free(g_msh.file_name);
 		close(g_msh.fdout);
 		close(g_msh.fdin);
 		close(g_msh.fd[0]);

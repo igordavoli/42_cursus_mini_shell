@@ -32,7 +32,7 @@ static void	ft_remchar(char *str, char chr)
 	reader = 0;
 	while (str[reader])
 	{
-		if (str[reader] != chr) 
+		if (str[reader] != chr)
 			str[writer++] = str[reader];
 		reader++;
 	}
