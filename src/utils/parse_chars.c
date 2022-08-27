@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 03:17:11 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/08/09 01:58:50 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/27 04:13:42 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,13 @@ void	parse_quotes(char *line, int *i, char quote)
 			g_msh.parsed_line = ft_strcjoin(g_msh.parsed_line, line[*i]);
 			return ;
 		}
-		if (line[*i] != '\0' && line[*i] != '$')
-			g_msh.parsed_line = ft_strcjoin(g_msh.parsed_line, line[*i]);
+		if (line[*i] != '\0')
+		{
+			if (quote == '\"' && line[*i] == '$')
+				;
+			else
+				g_msh.parsed_line = ft_strcjoin(g_msh.parsed_line, line[*i]);
+		}
 	}
 	write (STDOUT_FILENO, "Error: unclosed quotes\n", 24);
 	g_msh.error = 1;
@@ -59,6 +64,9 @@ void	parse_quotes(char *line, int *i, char quote)
 
 void	parse_redirect(char *line, int *i, char redirect)
 {
+	if (g_msh.file_name)
+		free(g_msh.file_name);
+	g_msh.file_name = NULL;
 	dup2(g_msh.save_stdin, STDIN_FILENO);
 	*i = *i + 1;
 	g_msh.redirect = redirect;
