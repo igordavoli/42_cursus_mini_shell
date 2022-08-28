@@ -21,6 +21,8 @@ void	parse_variables(char *line, int *i)
 	{
 		*i = *i + 1;
 		var = ft_itoa(g_msh.exit_code);
+		if (g_msh.parsed_line == NULL)
+			g_msh.parsed_line = ft_strdup("");
 		g_msh.parsed_line = ft_strjoin2(g_msh.parsed_line, var, 1, 1);
 	}
 	else if (ft_isdigit(line[*i + 1]))
