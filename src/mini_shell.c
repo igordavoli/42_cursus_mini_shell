@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/25 00:49:54 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:18:51 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_vars(int argc, char **argv, char **envp)
 
 void	init_vars_loop(void)
 {
+	g_msh.pid = 0;
 	g_msh.last_cmd = 0;
 	g_msh.doble_redirect = 0;
 	g_msh.redirect = 0;
