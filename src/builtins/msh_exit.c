@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 21:09:36 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/07/09 21:10:55 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/28 04:06:51 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static	int	ft_str_isdigit(char *str)
 	int	i;
 
 	i = -1;
+	if (str[0] != '-' || str[0] != '+')
+		++i;
 	while (str[++i])
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (0);
@@ -25,8 +27,6 @@ static	int	ft_str_isdigit(char *str)
 
 void	msh_exit(char **cmd)
 {
-	int	status;
-
 	write (1, "exit\n", 5);
 	if (cmd[1] != NULL && ft_str_isdigit(cmd[1]) == 0)
 	{
@@ -41,8 +41,9 @@ void	msh_exit(char **cmd)
 		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
 	}
 	else if (cmd[1] != NULL && ft_str_isdigit(cmd[1]) == 1)
-		g_msh.exit_code = ft_atoi(cmd[1]);
-	status = g_msh.exit_code;
+		g_msh.exit_code = ft_atol(cmd[1]);
+	if (g_msh.exit_code < 0)
+		g_msh.exit_code = 156;
 	free_all();
-	exit(status);
+	exit(g_msh.exit_code);
 }
