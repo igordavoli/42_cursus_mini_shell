@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/25 03:35:23 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:53:47 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,28 @@
 
 static int	count_cmds(char *cmds)
 {
-	int	n_cmds;
+	int		n_cmds;
+	int		is_quoted;
+	char	quote;
 
 	n_cmds = 1;
+	is_quoted = 0;
+	quote = 0;
 	while (*cmds)
-		if (*cmds++ == '|')
+	{
+		if ((*cmds == '\'' || *cmds == '\"') && is_quoted == 0)
+		{
+			is_quoted = 1;
+			quote = *cmds;
+		}
+		else if (*cmds == quote)
+		{
+			is_quoted = 0;
+			quote = 0;
+		}
+		if (*cmds++ == '|' && is_quoted == 0)
 			n_cmds++;
+	}
 	return (n_cmds);
 }
 
@@ -74,7 +90,10 @@ char	***parse_cmds(char *cmds)
 	int		i;
 
 	n_cmds = count_cmds(cmds);
-	splitted_part = ft_split(cmds, '|');
+	if (n_cmds == 1)
+		splitted_part = ft_split(cmds, 0);
+	else
+		splitted_part = ft_split(cmds, '|');
 	splitted_full = (char ***)malloc(sizeof(char **) * (n_cmds + 1));
 	splitted_full[n_cmds] = NULL;
 	i = 0;
