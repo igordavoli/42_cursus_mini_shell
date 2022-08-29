@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/28 21:18:51 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/08/29 03:23:14 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		g_msh.line = readline(refresh_prompt());
 		if (*g_msh.line)
 			execute_line();
+		free(g_msh.file_name);
 		free(g_msh.line);
 		close(g_msh.fdout);
 		close(g_msh.fdin);
