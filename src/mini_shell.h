@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/24 01:39:00 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/06 02:20:19 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_msh
 	int		save_stdout;
 	pid_t	pid;
 	int		last_cmd;
+	int		start_cmd;
+	t_dlist	*cmds_lst;
 }	t_msh;
 
 extern t_msh	g_msh;
@@ -77,14 +79,15 @@ void	execute(char **cmd);
 char	*find_cmd_path(char *cmd);
 void	free_all(void);
 void	free_cmds(char ***cmds);
+void	free_cmds_lst(void);
 void	free_matrix(char **matrix);
 char	*ft_strcjoin(char *s1, char s2);
 char	*get_node_value(t_dlist *node);
 int		is_builtin(char *cmd);
 void	open_file_input(void);
 void	open_file_output(void);
-char	***parse_cmds(char *cmds);
 void	parse_line(char *line);
+void	parse_pipe(char *line, int *i);
 void	parse_quotes(char *line, int *i, char quote);
 void	parse_redirect(char *line, int *i, char operator);
 void	parse_variables(char *line, int *i);

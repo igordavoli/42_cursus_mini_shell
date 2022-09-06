@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/29 03:23:14 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/06 02:14:48 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,20 @@ void	init_vars_loop(void)
 
 void	execute_line(void)
 {
-	int	i;
+	t_dlist	*tmp;
 
 	add_history(g_msh.line);
 	parse_line(g_msh.line);
 	if (g_msh.error == 0 && g_msh.parsed_line)
 	{
-		g_msh.splitted_cmds = parse_cmds(g_msh.parsed_line);
-		i = -1;
-		while (g_msh.splitted_cmds[++i])
+		tmp = g_msh.cmds_lst;
+		while (tmp != NULL)
 		{
-			if (g_msh.splitted_cmds[i + 1] == NULL)
+			if (tmp->next == NULL)
 				g_msh.last_cmd = 1;
-			execute(g_msh.splitted_cmds[i]);
+			execute((char **)tmp->content);
+			tmp = tmp->next;
 		}
-		free_cmds(g_msh.splitted_cmds);
 	}
 }
 
@@ -68,6 +67,7 @@ int	main(int argc, char **argv, char **envp)
 			execute_line();
 		free(g_msh.file_name);
 		free(g_msh.line);
+		free_cmds_lst();
 		close(g_msh.fdout);
 		close(g_msh.fdin);
 		close(g_msh.fd[0]);

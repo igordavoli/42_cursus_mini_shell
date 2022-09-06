@@ -6,38 +6,11 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/28 21:53:47 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/06 02:18:43 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_shell.h"
-
-static int	count_cmds(char *cmds)
-{
-	int		n_cmds;
-	int		is_quoted;
-	char	quote;
-
-	n_cmds = 1;
-	is_quoted = 0;
-	quote = 0;
-	while (*cmds)
-	{
-		if ((*cmds == '\'' || *cmds == '\"') && is_quoted == 0)
-		{
-			is_quoted = 1;
-			quote = *cmds;
-		}
-		else if (*cmds == quote)
-		{
-			is_quoted = 0;
-			quote = 0;
-		}
-		if (*cmds++ == '|' && is_quoted == 0)
-			n_cmds++;
-	}
-	return (n_cmds);
-}
 
 static void	ft_remchar(char *str, char chr)
 {
@@ -82,27 +55,15 @@ static char	**split_space(char *str)
 	return (cmd);
 }
 
-char	***parse_cmds(char *cmds)
+void	parse_pipe(char *line, int *i)
 {
-	char	**splitted_part;
-	char	***splitted_full;
-	int		n_cmds;
-	int		i;
+	char	*sub_cmd;
 
-	n_cmds = count_cmds(cmds);
-	if (n_cmds == 1)
-		splitted_part = ft_split(cmds, 0);
-	else
-		splitted_part = ft_split(cmds, '|');
-	splitted_full = (char ***)malloc(sizeof(char **) * (n_cmds + 1));
-	splitted_full[n_cmds] = NULL;
-	i = 0;
-	while (i < n_cmds)
-	{
-		splitted_full[i] = split_space(splitted_part[i]);
-		free(splitted_part[i]);
-		i++;
-	}
-	free(splitted_part);
-	return (splitted_full);
+	sub_cmd = NULL;
+	if (line[*i + 1] == '\0')
+		*i = *i + 1;
+	sub_cmd = ft_substr(line, g_msh.start_cmd, *i - g_msh.start_cmd);
+	ft_dlstadd_back(&g_msh.cmds_lst, ft_dlstnew(split_space(sub_cmd)));
+	free(sub_cmd);
+	g_msh.start_cmd = *i + 1;
 }
