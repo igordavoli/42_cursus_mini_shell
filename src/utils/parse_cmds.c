@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/06 21:19:23 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/06 22:20:36 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	parse_cmds(char *parsed_line)
 	printf("pline: %s\n", parsed_line);
 	while (parsed_line[++i])
 	{
-		if ((parsed_line[i] == '\'' || parsed_line[i] == '\"') && quote != 0)
+		if ((parsed_line[i] == '\'' || parsed_line[i] == '\"') && quote == 0)
 			quote = parsed_line[i];
 		else if (parsed_line[i] == quote)
 			quote = 0;
-		else if (parsed_line[i] == '|' || parsed_line[i + 1] == '\0')
+		if ((parsed_line[i] == '|' && quote == 0 ) || parsed_line[i + 1] == '\0')
 		{
 			if (parsed_line[i + 1] == '\0')
 				i++;
