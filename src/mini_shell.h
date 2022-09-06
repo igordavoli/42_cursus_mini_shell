@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/06 02:20:19 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:02:51 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ char	*get_node_value(t_dlist *node);
 int		is_builtin(char *cmd);
 void	open_file_input(void);
 void	open_file_output(void);
+void	parse_cmds(char *parsed_line);
 void	parse_line(char *line);
-void	parse_pipe(char *line, int *i);
 void	parse_quotes(char *line, int *i, char quote);
 void	parse_redirect(char *line, int *i, char operator);
 void	parse_variables(char *line, int *i);

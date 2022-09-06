@@ -49,7 +49,6 @@ void	parse_line(char *line)
 	g_msh.parsed_line = NULL;
 	i = -1;
 	g_msh.error = 0;
-	g_msh.start_cmd = 0;
 	while (line[++i] != '\0')
 	{
 		if (line[i] == '\"' || line[i] == '\'')
@@ -58,8 +57,6 @@ void	parse_line(char *line)
 			parse_variables(line, &i);
 		else if (line[i] == '<' || line[i] == '>')
 			parse_redirect(line, &i, line[i]);
-		if (line[i] == '|' || line[i + 1] == '\0')
-			parse_pipe(line, &i);
 		else if (line[i] != '\0')
 			g_msh.parsed_line = ft_strcjoin(g_msh.parsed_line, line[i]);
 		if (g_msh.error == 1 || line[i] == '\0')

@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/06 02:14:48 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:13:56 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	execute_line(void)
 	parse_line(g_msh.line);
 	if (g_msh.error == 0 && g_msh.parsed_line)
 	{
+		parse_cmds(g_msh.parsed_line);
 		tmp = g_msh.cmds_lst;
 		while (tmp != NULL)
 		{
@@ -65,7 +66,8 @@ int	main(int argc, char **argv, char **envp)
 		g_msh.line = readline(refresh_prompt());
 		if (*g_msh.line)
 			execute_line();
-		free(g_msh.file_name);
+		if (g_msh.file_name)
+			free(g_msh.file_name);
 		free(g_msh.line);
 		free_cmds_lst();
 		close(g_msh.fdout);

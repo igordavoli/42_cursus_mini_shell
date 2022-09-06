@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 00:18:22 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/06 02:18:43 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:19:23 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,31 @@ static char	**split_space(char *str)
 	return (cmd);
 }
 
-void	parse_pipe(char *line, int *i)
+void	parse_cmds(char *parsed_line)
 {
 	char	*sub_cmd;
+	char	quote;
+	int		start_cmd;
+	int		i;
 
-	sub_cmd = NULL;
-	if (line[*i + 1] == '\0')
-		*i = *i + 1;
-	sub_cmd = ft_substr(line, g_msh.start_cmd, *i - g_msh.start_cmd);
-	ft_dlstadd_back(&g_msh.cmds_lst, ft_dlstnew(split_space(sub_cmd)));
-	free(sub_cmd);
-	g_msh.start_cmd = *i + 1;
+	quote = 0;
+	start_cmd = 0;
+	i = -1;
+	printf("pline: %s\n", parsed_line);
+	while (parsed_line[++i])
+	{
+		if ((parsed_line[i] == '\'' || parsed_line[i] == '\"') && quote != 0)
+			quote = parsed_line[i];
+		else if (parsed_line[i] == quote)
+			quote = 0;
+		else if (parsed_line[i] == '|' || parsed_line[i + 1] == '\0')
+		{
+			if (parsed_line[i + 1] == '\0')
+				i++;
+			sub_cmd = ft_substr(parsed_line, start_cmd, i - start_cmd);
+			ft_dlstadd_back(&g_msh.cmds_lst, ft_dlstnew(split_space(sub_cmd)));
+			free(sub_cmd);
+			start_cmd = i + 1;
+		}
+	}
 }
