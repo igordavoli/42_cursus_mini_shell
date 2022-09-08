@@ -6,31 +6,11 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:49:15 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/08 19:14:04 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:41:05 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_shell.h"
-
-void	free_cmds(char ***cmds)
-{
-	int	i;
-	int	j;
-
-	if (cmds)
-	{
-		i = 0;
-		while (cmds[i])
-		{
-			j = 0;
-			while (cmds[i][j])
-				free(cmds[i][j++]);
-			free(cmds[i]);
-			i++;
-		}
-		free(cmds);
-	}
-}
 
 void	free_cmds_lst(void)
 {
@@ -62,7 +42,6 @@ void	free_matrix(char **matrix)
 
 void	free_all(void)
 {
-	free_cmds(g_msh.splitted_cmds);
 	free(g_msh.parsed_line);
 	free(g_msh.prompt);
 	ft_dlstclear(&g_msh.envp_lst, &free);

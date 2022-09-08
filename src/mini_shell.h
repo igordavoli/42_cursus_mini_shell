@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 05:16:59 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/06 21:02:51 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:42:00 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_msh
 	char	**envp;
 	t_dlist	*envp_lst;
 	char	*line;
-	char	***splitted_cmds;
 	char	*prompt;
 	int		exit_code;
 	char	*parsed_line;
@@ -46,7 +45,6 @@ typedef struct s_msh
 	int		save_stdout;
 	pid_t	pid;
 	int		last_cmd;
-	int		start_cmd;
 	t_dlist	*cmds_lst;
 }	t_msh;
 

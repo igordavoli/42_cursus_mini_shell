@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/08 20:12:34 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:41:16 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	init_vars_loop(void)
 	g_msh.doble_redirect = 0;
 	g_msh.redirect = 0;
 	g_msh.line = NULL;
-	g_msh.splitted_cmds = NULL;
 }
 
 void	execute_line(void)
