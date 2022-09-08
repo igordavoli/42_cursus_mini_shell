@@ -28,7 +28,7 @@ void	open_delimiter(void)
 			if (line != NULL)
 				free (line);
 			if (line == NULL && g_msh.error == 0)
-				printf("warning: here-document delimited by"
+				ft_printf("warning: here-document delimited by"
 					" end-of-file (wanted `%s')\n", g_msh.file_name);
 			close(fd);
 			g_msh.fdin = open(".here_doc", O_RDONLY);

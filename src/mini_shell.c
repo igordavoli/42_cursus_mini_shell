@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/06 21:13:56 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:12:34 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,9 @@ int	main(int argc, char **argv, char **envp)
 			execute_line();
 		if (g_msh.file_name)
 			free(g_msh.file_name);
+		g_msh.file_name = NULL;
 		free(g_msh.line);
 		free_cmds_lst();
-		close(g_msh.fdout);
-		close(g_msh.fdin);
-		close(g_msh.fd[0]);
-		close(g_msh.fd[1]);
 		dup2(g_msh.save_stdin, STDIN_FILENO);
 		dup2(g_msh.save_stdout, STDOUT_FILENO);
 	}

@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:49:15 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/06 02:15:19 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:14:04 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ void	free_cmds_lst(void)
 		tmp = g_msh.cmds_lst;
 		i = -1;
 		while (((char **)tmp->content)[++i])
-		{
-			printf("content %d: %s\n", i, ((char **)tmp->content)[i]);
 			free(((char **)tmp->content)[i]);
-		}
 		g_msh.cmds_lst = g_msh.cmds_lst->next;
 		free(tmp->content);
 		free(tmp);

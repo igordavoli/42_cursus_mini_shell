@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 03:17:11 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/09/06 21:23:25 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:05:02 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	parse_redirect(char *line, int *i, char redirect)
 	if (g_msh.file_name)
 		free(g_msh.file_name);
 	g_msh.file_name = NULL;
-	dup2(g_msh.save_stdin, STDIN_FILENO);
 	*i = *i + 1;
 	g_msh.redirect = redirect;
 	if (line[*i] == redirect)

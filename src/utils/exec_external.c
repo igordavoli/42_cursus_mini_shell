@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:48:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/08/29 03:22:33 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:15:25 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,18 @@ int	exec_external(char **cmd)
 	close(g_msh.fd[0]);
 	if (g_msh.file_name == NULL && g_msh.last_cmd == 0)
 		dup2(g_msh.fd[1], STDOUT_FILENO);
-	if (g_msh.file_name != NULL && g_msh.redirect == '<')
-	{
-		dup2(g_msh.fdin, STDIN_FILENO);
-		close (g_msh.fdin);
-	}
 	close(g_msh.fd[1]);
 	close(g_msh.save_stdin);
 	close(g_msh.save_stdout);
 	path = find_cmd_path(*cmd);
 	if (*cmd == NULL)
 		;
-	else if (execve(path, cmd, g_msh.envp) == -1)
+	else if (path == NULL)
 		printf("Error: can not exec: %s\n", *cmd);
+	else
+		execve(path, cmd, g_msh.envp);
 	free(path);
 	free_all();
-	exit (1);
+	exit(1);
 	return (0);
 }
