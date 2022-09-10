@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:26:38 by idavoli-          #+#    #+#             */
-/*   Updated: 2022/09/08 20:41:16 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/10 04:00:01 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_msh	g_msh;
 
-void	init_vars(int argc, char **argv, char **envp)
+static void	init_vars(int argc, char **argv, char **envp)
 {
 	g_msh.argc = argc;
 	g_msh.argv = argv;
@@ -25,21 +25,30 @@ void	init_vars(int argc, char **argv, char **envp)
 	g_msh.save_stdout = dup(STDOUT_FILENO);
 }
 
-void	init_vars_loop(void)
+static void	init_loop(void)
 {
 	g_msh.pid = 0;
 	g_msh.last_cmd = 0;
 	g_msh.doble_redirect = 0;
 	g_msh.redirect = 0;
-	g_msh.line = NULL;
 }
 
-void	execute_line(void)
+static void	end_loop(void)
+{
+	if (g_msh.file_name)
+		free(g_msh.file_name);
+	g_msh.file_name = NULL;
+	free_cmds_lst();
+	dup2(g_msh.save_stdin, STDIN_FILENO);
+	dup2(g_msh.save_stdout, STDOUT_FILENO);
+}
+
+static void	execute_line(char *line)
 {
 	t_dlist	*tmp;
 
-	add_history(g_msh.line);
-	parse_line(g_msh.line);
+	add_history(line);
+	parse_line(line);
 	if (g_msh.error == 0 && g_msh.parsed_line)
 	{
 		parse_cmds(g_msh.parsed_line);
@@ -56,22 +65,26 @@ void	execute_line(void)
 
 int	main(int argc, char **argv, char **envp)
 {
+	char	*line;
+
 	init_vars(argc, argv, envp);
 	while (1)
 	{
-		init_vars_loop();
+		init_loop();
 		signal(SIGINT, signal_handler);
 		signal(SIGSEGV, signal_exit);
-		g_msh.line = readline(refresh_prompt());
-		if (*g_msh.line)
-			execute_line();
-		if (g_msh.file_name)
-			free(g_msh.file_name);
-		g_msh.file_name = NULL;
-		free(g_msh.line);
-		free_cmds_lst();
-		dup2(g_msh.save_stdin, STDIN_FILENO);
-		dup2(g_msh.save_stdout, STDOUT_FILENO);
+		line = NULL;
+		line = readline(refresh_prompt());
+		if (line != NULL)
+			execute_line(line);
+		else
+		{
+			write(1, "exit\n", 5);
+			free_all();
+			exit(0);
+		}
+		free(line);
+		end_loop();
 	}
 	return (0);
 }
