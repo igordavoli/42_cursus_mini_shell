@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 03:17:11 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/09/08 19:05:02 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/11 03:12:42 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void	parse_redirect(char *line, int *i, char redirect)
 	if (g_msh.file_name)
 		free(g_msh.file_name);
 	g_msh.file_name = NULL;
-	*i = *i + 1;
 	g_msh.redirect = redirect;
-	if (line[*i] == redirect)
+	if (line[++*i] == redirect)
 	{
 		g_msh.doble_redirect = 1;
 		*i = *i + 1;
@@ -80,7 +79,7 @@ void	parse_redirect(char *line, int *i, char redirect)
 		*i = *i + 1;
 	if (check_syntax_error(line[*i]))
 		return ;
-	while (line[*i] != '\0' && line[*i] != ' ' && !check_syntax_error(line[*i]))
+	while (line[*i] && line[*i] != ' ' && line[*i] != '>' && line[*i] != '<')
 	{
 		g_msh.file_name = ft_strcjoin(g_msh.file_name, line[*i]);
 		*i = *i + 1;
@@ -90,4 +89,6 @@ void	parse_redirect(char *line, int *i, char redirect)
 		open_file_output();
 	else if (redirect == '<')
 		open_file_input();
+	if (line[*i] == '>' || line[*i] == '<')
+		parse_redirect(line, i, line[*i]);
 }
