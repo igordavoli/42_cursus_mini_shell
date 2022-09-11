@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:48:38 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/09/11 03:25:18 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/09/11 23:53:45 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	exec_external(char **cmd)
 		execve(path, cmd, g_msh.envp);
 	free(path);
 	free_all();
-	exit(1);
+	exit(127);
 	return (0);
 }
